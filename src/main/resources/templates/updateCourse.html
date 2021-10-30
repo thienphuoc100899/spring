@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Course</title>
+
+<!-- Font Icon -->
+    <link rel="stylesheet"th:href="@{/fonts/material-icon/css/material-design-iconic-font.min.css}">
+	<!-- Main css -->
+	<link rel="stylesheet" th:href="@{/css/sidebars.css}">	
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	
+ 	<!-- Bootstrap core CSS -->
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+</head>
+<body>
+<!-- Header start-->
+	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 logo"  th:href="@{/}" style="text-align: center;">MOCK PROJECT</a>
+		  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		  <div class="navbar-nav px-3">
+		    <div class="nav-item text-nowrap">
+		      <a class="nav-link" th:href="@{/logout}"><i class="zmdi zmdi-sign-in"></i> Logout</a>
+		    </div>
+		  </div>
+	</header>
+	<!-- Header end-->
+	<!-- Sidebar start-->
+	<div style="display: flex;">
+  		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 251px; min-height:100vh;">
+  			<div style="text-align: center;">
+  	  			<i class="zmdi zmdi-account-circle" style="font-size: 100px;"></i>
+	    		<p class="fs-4">Admin</p>
+  			</div>
+    		<hr>
+    		<ul class="nav nav-pills flex-column mb-auto">
+			    <li class="nav-item">
+			        <a th:href="@{/admin/home}" class="nav-link text-white" aria-current="page"><i class="zmdi zmdi-home"style="padding-right:16px ;"></i>Dashboard</a>
+			    </li>
+			    <li>
+			        <a th:href="@{/admin/course}" class="nav-link active text-white"style="color:#fff !important;" ><i class="zmdi zmdi-collection-bookmark" style="padding-right:16px ;"></i>Course</a>
+			    </li>
+			    <li>
+			        <a th:href="@{/admin/question}" class="nav-link text-white"><i class="zmdi zmdi-help"style="padding-right:16px ;"></i>Question</a>
+			    </li>
+			    <li>
+			        <a th:href="@{/admin/question}" class="nav-link text-white"><i class="zmdi zmdi-accounts-alt"style="padding-right:16px ;"></i>Users</a>
+			    </li>
+    		</ul>
+  		</div>
+  	<!-- Sidebar end-->
+	
+		
+
+		
+		<!--Update information of Course-->
+		<form action="#" th:action="@{/admin/course/save}"class="container"
+			th:object="${Course}" method="POST"style="width:800px">
+			<h2 style="margin-top:50px;text-align: center;">Update Course</h2>
+			<label for="your_name" style="font-size: 20px;">Course name</label>
+			<!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" /> <input type="text" th:field="*{courseName}" class="form-control mb-5"> 
+			<label for="your_name" style="font-size: 20px;">Description</label>	
+			<textarea th:field="*{courseDescription}" class="form-control mb-5" rows="5"></textarea>
+			<a th:href="@{/admin/course}" class="btn btn-warning col-2" style="height: 50px;color: white;padding: 12px;"><i class="zmdi zmdi-undo"></i> Back</a>
+			<button type="submit" class="btn btn-primary col-2" style="float: right;height: 50px;" ><i class="zmdi zmdi-edit"></i> Update</button>
+
+			
+
+		</form>
+
+	
+	
+	</div>
+</body>
+</html>

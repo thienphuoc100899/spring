@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Font Icon -->
+<link rel="stylesheet"
+	th:href="@{/fonts/material-icon/css/material-design-iconic-font.min.css}">
+<!-- Main css -->
+<link rel="stylesheet" th:href="@{/css/header.css}">
+<link rel="stylesheet" th:href="@{/css/sidebars.css}">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<title>Insert title here</title>
+</head>
+<body>
+	<a th:href="@{/}">Back to the list course</a>
+
+	<!-- New List Question -->
+	<div class="container my-2 mx-5">
+		<!--Show List Course-->
+		<h2>List of questions</h2>
+
+		<form action="#" th:action="@{/user/question/submit}" method="POST" th:object="${questionList}">
+		<input name="course_id" th:value="${course.id}" type="hidden">
+			<div th:each="question, isState : ${questionList.questions}">
+				<div
+					style="display: flex; justify-content: space-between; margin-top: 0px;">
+					<div style="display: flex; width: 1000px;">
+						<i class="zmdi zmdi-help"
+							style="padding-right: 16px; color: #333; font-size: 20px; padding-top: 7px;"></i>
+						<div>
+							<span th:text="Question + ' ' + ${isState.index + 1} + ':'"></span><b><span
+								th:text="${question.title}" style="margin: 5px;"></span></b>
+								
+							<div class="form-check">
+								<input required th:name="|questions[${isState.index}].chose|"  th:value="1" class="form-check-input" type="radio"
+									 id="optionA"> <label
+									th:text="${question.optionA}" class="form-check-label"
+									for="optionA"></label>
+							</div>
+
+							<div class="form-check">
+								<input required th:name="|questions[${isState.index}].chose|"  th:value="2" class="form-check-input" type="radio"
+									 id="optionB"> <label
+									th:text="${question.optionB}" class="form-check-label"
+									for="optionB"></label>
+							</div>
+							
+							<div class="form-check">
+								<input required th:name="|questions[${isState.index}].chose|"  th:value="3" class="form-check-input" type="radio"
+									 id="optionC"> <label
+									th:text="${question.optionC}" class="form-check-label"
+									for="optionC"></label>
+							</div>
+							
+							<div class="form-check">
+								<input required th:name="|questions[${isState.index}].chose|"  th:value="4" class="form-check-input" type="radio"
+									 id="optionD"> <label
+									th:text="${question.optionD}" class="form-check-label"
+									for="optionD"></label>
+							</div>
+							
+							<input th:name="|questions[${isState.index}].id|" th:value="${question.id}" type="hidden" >
+							<input th:name="|questions[${isState.index}].title|" th:value="${question.title}" type="hidden" >
+							<input th:name="|questions[${isState.index}].answer|" th:value="${question.answer}" type="hidden" >
+							
+						</div>
+					</div>
+				</div>
+				<hr>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+</body>
+</html>

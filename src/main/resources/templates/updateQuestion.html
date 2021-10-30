@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Update Question</title>
+
+<!-- Font Icon -->
+    <link rel="stylesheet"th:href="@{/fonts/material-icon/css/material-design-iconic-font.min.css}">
+	<!-- Main css -->
+	<link rel="stylesheet" th:href="@{/css/sidebars.css}">	
+	<link rel="stylesheet" th:href="@{/css/header.css}">
+	
+ 	<!-- Bootstrap core CSS -->
+ 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<!-- Header start-->
+	<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+		  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 logo"  th:href="@{/}" style="text-align: center;">MOCK PROJECT</a>
+		  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+		  <div class="navbar-nav px-3">
+		    <div class="nav-item text-nowrap">
+		      <a class="nav-link" th:href="@{/logout}"><i class="zmdi zmdi-sign-in"></i> Logout</a>
+		    </div>
+		  </div>
+	</header>
+	<!-- Header end-->
+	
+		<!-- Sidebar start-->
+	<div style="display: flex;">
+  		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 251px;min-height:100vh;">
+  			<div style="text-align: center;">
+  	  			<i class="zmdi zmdi-account-circle" style="font-size: 100px;"></i>
+	    		<p class="fs-4">Admin</p>
+  			</div>
+    		<hr>
+    		<ul class="nav nav-pills flex-column mb-auto">
+			      <li class="nav-item">
+			        <a th:href="@{/admin/home}" class="nav-link" aria-current="page"><i class="zmdi zmdi-home"style="padding-right:16px ;"></i>Dashboard</a>
+			      </li>
+			      <li>
+			        <a th:href="@{/admin/course}" class="nav-link text-white"><i class="zmdi zmdi-collection-bookmark" style="padding-right:16px ;"></i>Course</a>
+			      </li>
+			      <li>
+			        <a th:href="@{/admin/question}" class="nav-link text-white active" style="color:#fff !important;" ><i class="zmdi zmdi-help"style="padding-right:16px ;"></i>Question</a>
+			      </li>
+			      <li>
+			        <a th:href="@{/admin/question}" class="nav-link text-white"><i class="zmdi zmdi-accounts-alt"style="padding-right:16px ;"></i>Users</a>
+			      </li>
+	    	</ul>
+  		</div>
+  	<!-- Sidebar end-->
+	
+	<div class="container">
+		
+		
+		<form th:action="@{/admin/question/update/save}"style="width: 800px;margin-bottom:50px;"
+			th:object="${questionDto}" method="POST"class="container">
+
+			<h2 style="margin-top:20px;text-align: center;">Update Question</h2>
+			
+			<div class="form-group mb-3">
+				<label for="course_name" style="font-size: 20px;">ID</label> </br>
+				<input th:value="${questionDto.id}" type="text" class="form-control" disabled="disabled">
+				<input th:field="*{id}" type="text" class="form-control" id="id" name="id" hidden="true">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="course_name" style="font-size: 20px;">Course</label> </br>
+				<select id="courseId" name="courseId" style="width:100%;font-size: 20px;"class="form-control" disabled="disabled">
+					<option th:text="${courseQuestion.courseName}" th:value="${courseQuestion.id}">
+				</select>
+			<input hidden="true" th:field="*{courseId}" type="text" class="form-control" id="courseId"name="courseId" th:value="${courseQuestion.id}">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="question_title" style="font-size: 20px;">Question title</label> 
+				<input th:field="*{title}" type="text" class="form-control" id="question_title"name="question_title">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="option_a" style="font-size: 20px;">Option A</label> 
+				<input th:field="*{optionA}" type="text" class="form-control" id="option_a"name="option_a">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="option_b" style="font-size: 20px;">Option B</label> 
+				<input th:field="*{optionB}" type="text" class="form-control" id="option_b"name="option_b">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="option_c" style="font-size: 20px;">Option C</label> 
+				<input th:field="*{optionC}" type="text" class="form-control" id="option_c"name="option_c">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="option_d" style="font-size: 20px;">Option D</label> 
+				<input th:field="*{optionD}" type="text" class="form-control" id="option_d"name="option_d">
+			</div>
+			
+			<div class="form-group mb-3">
+				<label for="answer" style="font-size: 20px;">Answer</label> 
+				<input th:field="*{answer}" type="text" class="form-control" id="answer"name="answer">
+			</div>
+			
+			<input th:field="*{chose}" type="text" class="form-control" id="chose" name="chose" hidden="true">
+			
+			<a th:href="@{/admin/question/list?course_id={course_id}(course_id = ${courseQuestion.id})}" class="btn btn-warning col-2" style="height: 50px;color: white;padding: 12px;"><i class="zmdi zmdi-long-arrow-left"></i> Back</a>
+			<button type="submit" class="btn btn-primary col-2" style="float: right;height: 50px;">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
